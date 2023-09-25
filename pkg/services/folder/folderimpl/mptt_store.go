@@ -35,18 +35,15 @@ func (h *HierarchicalEntity[T]) GetEntity() T {
 
 type hierarchicalStore struct {
 	sqlStore
-	db        db.DB
-	log       log.Logger
-	table     string
-	parentCol string
+	db  db.DB
+	log log.Logger
 }
 
 func ProvideHierarchicalStore(db db.DB) *hierarchicalStore {
 	logger := log.New("folder-store-mptt")
 	store := &hierarchicalStore{
-		db: db, table: "folder",
-		parentCol: "parent_uid",
-		log:       logger,
+		db:  db,
+		log: logger,
 	}
 	store.sqlStore = sqlStore{db: db, log: logger}
 
